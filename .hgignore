@@ -1,0 +1,19 @@
+syntax: glob
+
+.cache
+.coverage
+.installed.cfg
+.mr.developer.cfg
+bin
+build
+coverage-report
+develop-eggs
+dist
+doc/_api
+eggs
+include
+lib
+local
+local.cfg
+parts
+report.xml

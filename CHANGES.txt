@@ -1,0 +1,8 @@
+========================
+Change log for batou_scm
+========================
+
+0.1 (unreleased)
+================
+
+initial release
