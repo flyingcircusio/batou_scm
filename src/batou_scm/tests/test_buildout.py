@@ -1,4 +1,5 @@
 from batou.conftest import root
+from batou.lib.file import Directory
 from batou_scm.buildout import Buildout
 from batou_scm.source import Source
 import ConfigParser
@@ -59,6 +60,15 @@ def test_version_pins_in_overrides_have_defined_order(buildout):
     config = read_config(buildout.overrides.content)
     pins = config.items('versions')
     assert pins == sorted(pins)
+
+
+def test_shared_egg_dir_is_created_for_service_user(buildout):
+    config = read_config(buildout.overrides.content)
+    eggs_dir = config.get('buildout', 'eggs-directory')
+    assert eggs_dir == buildout.map('~/' + eggs_dir.split('/')[-1])
+    assert any(component.path == eggs_dir
+               for component in buildout.sub_components
+               if isinstance(component, Directory))
 
 
 root  # XXX satisfy pyflakes
