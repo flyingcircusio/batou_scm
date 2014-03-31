@@ -1,7 +1,9 @@
 from batou.component import Component
-from batou.lib.file import File
+from batou.lib.file import File, Content
 from batou.lib.mercurial import Clone
 import ast
+import collections
+import os.path
 import pkg_resources
 
 
@@ -9,6 +11,14 @@ class Source(Component):
 
     dist_sources = '[]'
     sources = '[]'
+
+    hg_hostfingerprints = {
+        'bitbucket.org':
+        '24:9c:45:8b:9c:aa:ba:55:4e:01:6d:58:ff:e4:28:7d:2a:14:ae:3b',
+        'code.gocept.com':
+        '5e:ec:16:18:7a:4a:c1:33:9d:7d:35:42:ff:f4:39:69:3f:8c:66:d6',
+    }
+    additional_hgrc_content = ''
 
     vcs_update = 'True'
 
@@ -18,12 +28,23 @@ class Source(Component):
                 setattr(self, name, ast.literal_eval(getattr(self, name)))
 
     def configure(self):
-        self._eval_attr('dist_sources', 'sources', 'vcs_update')
+        self._eval_attr('dist_sources', 'sources', 'vcs_update',
+                        'hg_hostfingerprints')
+
+        self.hg_hostfingerprints = collections.OrderedDict(
+            x for x in sorted(self.hg_hostfingerprints.items()))
 
         self.provide('source', self)
 
-        self += File('~/.hgrc', source=pkg_resources.resource_filename(
+        additional_hgrc = os.path.join(self.defdir, 'hgrc')
+        if not self.additional_hgrc_content and os.path.exists(
+                additional_hgrc):
+            self |= Content('additional_hgrc', source=additional_hgrc)
+            self.additional_hgrc_content = self._.content
+
+        self.hgrc = File('~/.hgrc', source=pkg_resources.resource_filename(
             'batou_scm', 'resources/hgrc'))
+        self += self.hgrc
 
         self.distributions = dict(
             self.add_clone(url) for url in self.dist_sources)

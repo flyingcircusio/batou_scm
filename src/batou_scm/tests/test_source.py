@@ -1,6 +1,7 @@
 from batou.conftest import root
 from batou.lib.mercurial import Clone
 from batou_scm.source import Source
+import os.path
 import pytest
 
 
@@ -14,6 +15,7 @@ def source(root):
         sources=repr([
             'https://example.com/baz revision=BAZ',
         ]))
+    source.defdir = root.defdir
     root.component += source
     root.component.configure()
     return source
@@ -54,6 +56,24 @@ def test_revisions_are_read_from_parameters(source):
     assert source.clones['foo'].revision is None
     assert source.clones['bar'].revision is None
     assert source.clones['baz'].revision == 'BAZ'
+
+
+def test_hg_hostfingerprints_are_sorted(source):
+    source.hg_hostfingerprints['bitbucket.org'] = 'fpr1'
+    source.hg_hostfingerprints['example.com'] = 'fpr2'
+    source.configure()
+    assert source.hgrc.content.startswith("""\
+[hostfingerprints]
+bitbucket.org = fpr1
+code.gocept.com = 5e:ec:16:18:7a:4a:c1:33:9d:7d:35:42:ff:f4:39:69:3f:8c:66:d6
+example.com = fpr2
+""")
+
+
+def test_additional_hgrc_content_is_taken_from_file_if_present(source):
+    open(os.path.join(source.defdir, 'hgrc'), 'w').write('foo')
+    source.configure()
+    assert 'foo' in source.hgrc.content
 
 
 root  # XXX satisfy pyflakes
