@@ -6,7 +6,7 @@ import pkg_resources
 class Buildout(Buildout):
 
     python = '2.7'
-    version = '2.2.0'
+    version = '2.2.1'
     setuptools = '1.3'
 
     def configure(self):
