@@ -9,11 +9,13 @@ import pytest
 
 @pytest.fixture
 def buildout(root):
-    root.component += Source(
+    source = Source(
         dist_sources=repr([
             'https://example.com/foo',
             'https://example.com/bar',
         ]))
+    source.defdir = root.defdir
+    root.component += source
     root.component += Buildout()
     root.component.configure()
     return root.component._
