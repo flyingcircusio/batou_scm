@@ -14,7 +14,7 @@ class Source(Component):
 
     hg_hostfingerprints = {
         'bitbucket.org':
-        '24:9c:45:8b:9c:aa:ba:55:4e:01:6d:58:ff:e4:28:7d:2a:14:ae:3b',
+        '67:b3:bf:9f:c5:38:0e:4c:dd:4e:8a:da:3d:11:1b:c2:a5:d1:6c:6b',
         'code.gocept.com':
         '5e:ec:16:18:7a:4a:c1:33:9d:7d:35:42:ff:f4:39:69:3f:8c:66:d6',
     }
