@@ -1,3 +1,4 @@
+from batou import UpdateNeeded
 from batou.conftest import root
 from batou.lib.file import Directory
 from batou_scm.buildout import Buildout
@@ -26,13 +27,6 @@ def read_config(content):
     config = ConfigParser.ConfigParser()
     config.readfp(StringIO.StringIO(content))
     return config
-
-
-def test_buildout_verify_depends_on_source_verify(buildout):
-    with mock.patch('batou.lib.buildout.Buildout.verify'):
-        buildout.source.verify = mock.Mock()
-        buildout.verify()
-        assert buildout.source.verify.called
 
 
 def test_dist_paths_are_listed_as_develop_paths_in_overrides(buildout):
@@ -74,6 +68,30 @@ def test_shared_egg_dir_is_created_for_service_user(buildout):
     assert any(component.path == eggs_dir
                for component in buildout.sub_components
                if isinstance(component, Directory))
+
+
+def test_verify_checks_source(buildout):
+    with mock.patch('batou.lib.buildout.Buildout.verify'):
+        with mock.patch('batou.lib.mercurial.Clone.has_changes',
+                        mock.PropertyMock()) as has_changes:
+            has_changes.return_value = False
+            buildout.source.assert_no_subcomponent_changes = mock.Mock()
+            buildout.verify()
+            assert buildout.source.assert_no_subcomponent_changes.called
+            assert has_changes.called
+
+
+def test_verify_result_is_cached(buildout):
+    with mock.patch('batou.lib.buildout.Buildout.verify'):
+        with mock.patch('batou.lib.mercurial.Clone.has_changes'):
+            with mock.patch.object(
+                    buildout.source, 'assert_no_subcomponent_changes') as ansc:
+                ansc.side_effect = UpdateNeeded
+                with pytest.raises(UpdateNeeded):
+                    buildout.verify()
+                with pytest.raises(UpdateNeeded):
+                    buildout.verify()
+                assert 1 == ansc.call_count
 
 
 root  # XXX satisfy pyflakes
