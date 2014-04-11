@@ -15,7 +15,6 @@ class Buildout(Buildout):
         self.dist_names, distributions = zip(
             *sorted(self.source.distributions.items()))
         self.dist_paths = [clone.target for clone in distributions]
-        self.additional_config += distributions
 
         # A directory for eggs shared by buildouts within the deployment is
         # created for the service user. Assuming that a user cannot have
@@ -37,3 +36,8 @@ class Buildout(Buildout):
         result = {'setuptools': self.setuptools, 'zc.buildout': self.version}
         result.update({name: '' for name in self.dist_names})
         return sorted(result.items())
+
+    def verify(self):
+        # We need to re-run buildout if any of the sources has changed
+        self.source.verify()
+        super(Buildout, self).verify()
