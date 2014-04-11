@@ -1,3 +1,4 @@
+from batou import UpdateNeeded
 from batou.lib.buildout import Buildout
 from batou.lib.file import Directory, File
 import pkg_resources
@@ -37,7 +38,22 @@ class Buildout(Buildout):
         result.update({name: '' for name in self.dist_names})
         return sorted(result.items())
 
+    __update_needed = None
+
     def verify(self):
-        # We need to re-run buildout if any of the sources has changed
-        self.source.verify()
+        # We need to re-run buildout if any of the sources has changed.
+        # This check incurs network access for each source checkout, so we
+        # want to short-cut repeated calls.
+        if self.__update_needed is None:
+            try:
+                self.source.assert_no_subcomponent_changes()
+            except UpdateNeeded:
+                self.__update_needed = True
+            else:
+                self.__update_needed = False
+            for clone in self.source.clones.values():
+                if clone.has_changes:
+                    self.__update_needed = True
+        if self.__update_needed:
+            raise UpdateNeeded()
         super(Buildout, self).verify()

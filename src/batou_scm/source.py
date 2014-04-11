@@ -1,4 +1,3 @@
-from batou import UpdateNeeded
 from batou.component import Component
 from batou.lib.file import File, Content
 from batou.lib.mercurial import Clone
@@ -62,18 +61,3 @@ class Source(Component):
         name = parameters['target']
         self += Clone(url, vcs_update=self.vcs_update, **parameters)
         return name, self._
-
-    __update_needed = None
-
-    def verify(self):
-        # This check incurs network access for each source checkout, so we
-        # want to short-cut repeated calls.
-        if self.__update_needed is None:
-            try:
-                self.assert_no_subcomponent_changes()
-            except UpdateNeeded:
-                self.__update_needed = True
-            else:
-                self.__update_needed = False
-        if self.__update_needed:
-            raise UpdateNeeded()
