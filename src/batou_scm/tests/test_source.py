@@ -1,6 +1,8 @@
+from batou import UpdateNeeded
 from batou.conftest import root
 from batou.lib.mercurial import Clone
 from batou_scm.source import Source
+import mock
 import os.path
 import pytest
 
@@ -74,6 +76,16 @@ def test_additional_hgrc_content_is_taken_from_file_if_present(source):
     open(os.path.join(source.defdir, 'hgrc'), 'w').write('foo')
     source.configure()
     assert 'foo' in source.hgrc.content
+
+
+def test_verify_result_is_cached(source):
+    with mock.patch.object(source, 'assert_no_subcomponent_changes') as ansc:
+        ansc.side_effect = UpdateNeeded
+        with pytest.raises(UpdateNeeded):
+            source.verify()
+        with pytest.raises(UpdateNeeded):
+            source.verify()
+        assert 1 == ansc.call_count
 
 
 root  # XXX satisfy pyflakes
