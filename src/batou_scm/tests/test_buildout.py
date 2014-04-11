@@ -4,6 +4,7 @@ from batou_scm.buildout import Buildout
 from batou_scm.source import Source
 import ConfigParser
 import StringIO
+import mock
 import pytest
 
 
@@ -27,9 +28,11 @@ def read_config(content):
     return config
 
 
-def test_buildout_depends_on_dist_clones(buildout):
-    dist_clones = buildout.source.distributions.values()
-    assert set(dist_clones).issubset(buildout.sub_components)
+def test_buildout_verify_depends_on_source_verify(buildout):
+    with mock.patch('batou.lib.buildout.Buildout.verify'):
+        buildout.source.verify = mock.Mock()
+        buildout.verify()
+        assert buildout.source.verify.called
 
 
 def test_dist_paths_are_listed_as_develop_paths_in_overrides(buildout):
