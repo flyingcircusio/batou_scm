@@ -28,7 +28,7 @@ class Buildout(Buildout):
             'buildout_overrides.cfg',
             source=pkg_resources.resource_filename(
                 'batou_scm', 'resources/buildout_overrides.cfg'))
-        self += self.overrides
+        self.additional_config += (self.overrides,)
 
         super(Buildout, self).configure()
 
