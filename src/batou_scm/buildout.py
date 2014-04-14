@@ -11,11 +11,16 @@ class Buildout(Buildout):
     setuptools = '1.3'
 
     def configure(self):
-        self.source = self.require_one('source', self.host)
-
-        self.dist_names, distributions = zip(
-            *sorted(self.source.distributions.items()))
-        self.dist_paths = [clone.target for clone in distributions]
+        try:
+            self.source = self.require_one('source', self.host)
+        except KeyError:
+            self.source = None
+            self.dist_names = []
+            self.dist_paths = []
+        else:
+            self.dist_names, distributions = zip(
+                *sorted(self.source.distributions.items()))
+            self.dist_paths = [clone.target for clone in distributions]
 
         # A directory for eggs shared by buildouts within the deployment is
         # created for the service user. Assuming that a user cannot have
@@ -44,7 +49,7 @@ class Buildout(Buildout):
         # We need to re-run buildout if any of the sources has changed.
         # This check incurs network access for each source checkout, so we
         # want to short-cut repeated calls.
-        if self.__update_needed is None:
+        if self.source and self.__update_needed is None:
             try:
                 self.source.assert_no_subcomponent_changes()
             except UpdateNeeded:
