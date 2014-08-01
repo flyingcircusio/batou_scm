@@ -9,11 +9,11 @@ import pytest
 def source(root):
     source = Source(
         dist_sources=repr([
-            'https://example.com/foo',
-            'https://example.com/bar branch=BAR',
+            'hg+https://example.com/foo',
+            'hg+https://example.com/bar branch=BAR',
         ]),
         sources=repr([
-            'https://example.com/baz revision=BAZ',
+            'hg+https://example.com/baz revision=BAZ',
         ]))
     source.defdir = root.defdir
     root.component += source
