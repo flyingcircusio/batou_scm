@@ -1,10 +1,12 @@
 from batou.component import Component
 from batou.lib.file import File, Content
-from batou.lib.mercurial import Clone
 import ast
+import batou.lib.git
+import batou.lib.mercurial
 import collections
 import os.path
 import pkg_resources
+import urlparse
 
 
 class Source(Component):
@@ -51,13 +53,33 @@ class Source(Component):
         self.clones = self.distributions.copy()
         self.clones.update(self.add_clone(url) for url in self.sources)
 
+    VCS = {
+        'hg': {
+            'component': batou.lib.mercurial.Clone,
+            'default-branch': 'default',
+        },
+        'git': {
+            'component': batou.lib.git.Clone,
+            'default-branch': 'master',
+        },
+    }
+
     def add_clone(self, url):
+        parts = urlparse.urlsplit(url)
+        vcs, _, scheme = parts.scheme.partition('+')
+        if not vcs:
+            raise ValueError(
+                'Malformed VCS URL, need <vcs>+<protocol>://<url>, '
+                'e.g. hg+ssh://hg@bitbucket.org/gocept/batou')
+        url = urlparse.urlunsplit((scheme,) + parts[1:])
+
         url, _, parameter_list = url.partition(' ')
         parameters = dict(
             target=filter(bool, url.split('/'))[-1],
-            branch='default',
+            branch=self.VCS[vcs]['default-branch']
         )
         parameters.update(x.split('=') for x in parameter_list.split())
-        name = parameters['target']
-        self += Clone(url, vcs_update=self.vcs_update, **parameters)
-        return name, self._
+
+        clone = self.VCS[vcs]['component']
+        self += clone(url, vcs_update=self.vcs_update, **parameters)
+        return parameters['target'], self._

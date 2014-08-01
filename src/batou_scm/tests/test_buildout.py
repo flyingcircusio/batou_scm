@@ -13,8 +13,8 @@ import pytest
 def buildout(root):
     source = Source(
         dist_sources=repr([
-            'https://example.com/foo',
-            'https://example.com/bar',
+            'hg+https://example.com/foo',
+            'hg+https://example.com/bar',
         ]))
     source.defdir = root.defdir
     root.component += source
