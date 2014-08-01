@@ -69,8 +69,8 @@ class Source(Component):
         vcs, _, scheme = parts.scheme.partition('+')
         if not vcs:
             raise ValueError(
-                'Malformed VCS URL, need <vcs>+<protocol>://<url>, '
-                'e.g. hg+ssh://hg@bitbucket.org/gocept/batou')
+                'Malformed VCS URL %r, need <vcs>+<protocol>://<url>, '
+                'e.g. hg+ssh://hg@bitbucket.org/gocept/batou' % url)
         url = urlparse.urlunsplit((scheme,) + parts[1:])
 
         url, _, parameter_list = url.partition(' ')
