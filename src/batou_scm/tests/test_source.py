@@ -47,9 +47,15 @@ def test_distributions_are_collected_separately(source):
 
 
 def test_branches_are_read_from_parameters(source):
-    assert source.clones['foo'].branch == 'default'
     assert source.clones['bar'].branch == 'BAR'
-    assert source.clones['baz'].branch == 'default'
+
+
+def test_branch_is_set_to_default_if_not_given(source):
+    assert source.clones['foo'].branch == 'default'
+
+
+def test_branch_is_not_set_if_revision_given(source):
+    assert source.clones['baz'].branch is None
 
 
 def test_revisions_are_read_from_parameters(source):
