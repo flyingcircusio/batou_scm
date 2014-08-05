@@ -20,7 +20,7 @@ setup(
     version='0.1.dev0',
 
     install_requires=[
-        'batou > 1.0b17',
+        'batou >= 1.0b26.dev0',
     ],
 
     extras_require={
