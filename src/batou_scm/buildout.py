@@ -14,13 +14,18 @@ class Buildout(Buildout):
         try:
             self.source = self.require_one('source', self.host)
         except KeyError:
-            self.source = None
-            self.dist_names = []
-            self.dist_paths = []
+            have_dists = False
         else:
+            have_dists = len(self.source.distributions)
+
+        if have_dists:
             self.dist_names, distributions = zip(
                 *sorted(self.source.distributions.items()))
             self.dist_paths = [clone.target for clone in distributions]
+        else:
+            self.source = None
+            self.dist_names = []
+            self.dist_paths = []
 
         # A directory for eggs shared by buildouts within the deployment is
         # created for the service user. Assuming that a user cannot have
