@@ -15,6 +15,7 @@ class Buildout(Buildout):
             self.source = self.require_one('source', self.host)
         except KeyError:
             have_dists = False
+            self.source = None
         else:
             have_dists = len(self.source.distributions)
 
@@ -23,7 +24,6 @@ class Buildout(Buildout):
                 *sorted(self.source.distributions.items()))
             self.dist_paths = [clone.target for clone in distributions]
         else:
-            self.source = None
             self.dist_names = []
             self.dist_paths = []
 
