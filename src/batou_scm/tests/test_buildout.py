@@ -45,6 +45,17 @@ def test_dist_paths_are_listed_as_develop_paths_in_overrides(buildout):
     ]).issubset(config.get('buildout', 'develop +').split())
 
 
+def test_no_dist_sources_configured_does_not_break(root):
+    source = Source()
+    source.defdir = root.defdir
+    root.component += source
+    root.component += Buildout()
+    root.component.configure()
+    buildout = root.component._
+    assert 'develop +=' not in buildout.overrides.content
+    assert buildout.source is not None
+
+
 def test_develop_paths_in_overrides_have_defined_order(buildout):
     config = read_config(buildout.overrides.content)
     develop_paths = config.get('buildout', 'develop +').split()
