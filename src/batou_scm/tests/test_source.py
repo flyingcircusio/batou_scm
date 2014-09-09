@@ -71,7 +71,7 @@ def test_hg_hostfingerprints_are_sorted(source):
     assert source.hgrc.content.startswith("""\
 [hostfingerprints]
 bitbucket.org = fpr1
-code.gocept.com = 5e:ec:16:18:7a:4a:c1:33:9d:7d:35:42:ff:f4:39:69:3f:8c:66:d6
+code.gocept.com = 61:3f:8d:c9:b5:1f:65:79:68:d2:7d:1b:45:a2:c9:cb:b0:b4:32:de
 example.com = fpr2
 """)
 
