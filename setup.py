@@ -17,7 +17,7 @@ def project_path(*names):
 
 setup(
     name='batou_scm',
-    version='0.1.1',
+    version='0.1.2.dev0',
 
     install_requires=[
         'batou >= 1.0b26.dev0',
