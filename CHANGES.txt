@@ -2,13 +2,14 @@
 Change log for batou_scm
 ========================
 
+
 0.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- Update code.gocept.com fingerprint.
 
 
 0.1 (2014-08-28)
 ================
 
-initial release
+- initial release
