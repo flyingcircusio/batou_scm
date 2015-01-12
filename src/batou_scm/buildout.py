@@ -10,6 +10,8 @@ class Buildout(Buildout):
     version = '2.2.1'
     setuptools = '1.3'
 
+    eggs_directory = '~/.batou-shared-eggs'
+
     def configure(self):
         try:
             self.source = self.require_one('source', self.host)
@@ -31,7 +33,7 @@ class Buildout(Buildout):
         # created for the service user. Assuming that a user cannot have
         # multiple non-sandboxed deployments and that development deployments
         # are sandboxed, eggs are never shared across deployments or users.
-        self.eggs_directory = Directory('~/.batou-shared-eggs')
+        self.eggs_directory = Directory(self.eggs_directory)
         self += self.eggs_directory
 
         self.overrides = File(
