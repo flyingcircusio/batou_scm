@@ -3,7 +3,7 @@ Change log for batou_scm
 ========================
 
 
-0.1.2 (unreleased)
+0.1.2 (2015-01-12)
 ==================
 
 - Make ``Buildout.eggs_directory`` path configurable.
