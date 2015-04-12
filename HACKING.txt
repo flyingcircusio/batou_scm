@@ -15,7 +15,7 @@ Developing batou_scm
     `report by e-mail <mail@gocept.com>`_
 
 :Source code:
-    https://bitbucket.org/flyingcircus/batou_scm
+    https://bitbucket.org/gocept/batou_scm
 
 :Current change log:
-    https://bitbucket.org/flyingcircus/batou_scm/raw-file/tip/CHANGES.txt
+    https://bitbucket.org/gocept/batou_scm/raw/default/CHANGES.txt
