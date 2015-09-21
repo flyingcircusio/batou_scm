@@ -11,6 +11,7 @@ class Buildout(Buildout):
     setuptools = '1.3'
 
     eggs_directory = '~/.batou-shared-eggs'
+    versionpins = None
 
     def configure(self):
         try:
@@ -69,3 +70,29 @@ class Buildout(Buildout):
         if self.__update_needed:
             raise UpdateNeeded()
         super(Buildout, self).verify()
+
+
+class BuildoutWithVersionPins(Buildout):
+    """Buildout which expects a version attribute on the source component.
+
+    It has to be a directory containing a file named `versions.cfg`.
+    """
+
+    def configure(self):
+        source = self.require_one('source', self.host)
+        self.versionpins = source.versions
+
+        # XXX We should depend on all clones we are using in the buildout.cfg,
+        # not just the versionpins.
+        self.additional_config += (self.versionpins, )
+
+        super(BuildoutWithVersionPins, self).configure()
+
+    def verify(self):
+        super(BuildoutWithVersionPins, self).verify()
+        # XXX Only checking has_changes won't detect advanced SCM operations
+        # like updating to an older revision, but as an 80-20 solution it's
+        # quite good enough.
+        if (self.versionpins.has_changes
+                or self.versionpins.has_outgoing_changesets):
+            raise UpdateNeeded()

@@ -1,7 +1,7 @@
 from batou import UpdateNeeded
 from batou.conftest import root
 from batou.lib.file import Directory
-from batou_scm.buildout import Buildout
+from batou_scm.buildout import Buildout, BuildoutWithVersionPins
 from batou_scm.source import Source
 import ConfigParser
 import StringIO
@@ -19,6 +19,22 @@ def buildout(root):
     source.defdir = root.defdir
     root.component += source
     root.component += Buildout()
+    root.component.configure()
+    return root.component._
+
+
+@pytest.fixture(scope='function')
+def buildout_with_version_pins(root):
+    source = Source(
+        dist_sources=repr([
+            'hg+https://example.com/foo',
+            'hg+https://example.com/bar',
+        ]),
+        sources=repr(['hg+https://example.com/ver target=versions']))
+    source.defdir = root.defdir
+    root.component += source
+    source.versions = source.clones['versions']
+    root.component += BuildoutWithVersionPins()
     root.component.configure()
     return root.component._
 
@@ -111,6 +127,31 @@ def test_verify_result_is_cached(buildout):
                 with pytest.raises(UpdateNeeded):
                     buildout.verify()
                 assert 1 == ansc.call_count
+
+
+def test_buildout__BuildoutWithVersionPins__verify__1(
+        buildout_with_version_pins):
+    """`verify()` requests update on changed versions."""
+    buildout = buildout_with_version_pins
+    with mock.patch('batou.lib.mercurial.Clone.has_changes',
+                    mock.PropertyMock()) as has_changes:
+        has_changes.return_value = True
+        with pytest.raises(UpdateNeeded):
+            buildout.verify()
+
+
+def test_buildout__BuildoutWithVersionPins__verify__2(
+        buildout_with_version_pins):
+    """`verify()` requests update on outgoing changes in versions."""
+    buildout = buildout_with_version_pins
+    with mock.patch('batou.lib.mercurial.Clone.has_outgoing_changesets',
+                    mock.PropertyMock()) as has_outgoing_changesets, \
+            mock.patch('batou.lib.mercurial.Clone.has_changes',
+                       mock.PropertyMock()) as has_changes:
+        has_changes.return_value = False
+        has_outgoing_changesets.return_value = True
+        with pytest.raises(UpdateNeeded):
+            buildout.verify()
 
 
 root  # XXX satisfy pyflakes
