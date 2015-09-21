@@ -6,7 +6,8 @@ Change log for batou_scm
 0.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- Add ``BuildoutWithVersionPins`` to be able to handle version pinnings in a
+  separate source package.
 
 
 0.1.3 (2015-05-21)
