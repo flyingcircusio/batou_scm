@@ -6,6 +6,8 @@ Change log for batou_scm
 0.3 (unreleased)
 ================
 
+- Use ``zc.buildout == 2.5.0`` and ``setuptools == 20.7`` as default versions.
+
 - Drop support for Python 2.6.
 
 
