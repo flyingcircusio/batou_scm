@@ -5,14 +5,11 @@ Developing batou_scm
 :Author:
     `gocept <http://gocept.com/>`_ <mail@gocept.com>
 
-:Online documentation:
-    https://pythonhosted.org/batou_scm/
-
 :PyPI page:
     https://pypi.python.org/pypi/batou_scm
 
 :Issues:
-    `report by e-mail <mail@gocept.com>`_
+    https://bitbucket.org/gocept/batou_scm/issues
 
 :Source code:
     https://bitbucket.org/gocept/batou_scm
