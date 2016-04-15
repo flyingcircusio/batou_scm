@@ -3,7 +3,7 @@ Change log for batou_scm
 ========================
 
 
-0.3 (unreleased)
+0.3 (2016-04-15)
 ================
 
 - Use ``zc.buildout == 2.5.0`` and ``setuptools == 20.7`` as default versions.
