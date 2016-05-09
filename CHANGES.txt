@@ -8,6 +8,8 @@ Change log for batou_scm
 
 - Update bitbucket.org fingerprint.
 
+- Require current batou for tests while keeping code compatible with pre-1.0.
+
 
 0.3 (2016-04-15)
 ================

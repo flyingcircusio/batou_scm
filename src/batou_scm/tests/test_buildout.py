@@ -16,7 +16,6 @@ def buildout(root):
             'hg+https://example.com/foo',
             'hg+https://example.com/bar',
         ]))
-    source.defdir = root.defdir
     root.component += source
     root.component += Buildout()
     root.component.configure()
@@ -31,7 +30,6 @@ def buildout_with_version_pins(root):
             'hg+https://example.com/bar',
         ]),
         sources=repr(['hg+https://example.com/ver target=versions']))
-    source.defdir = root.defdir
     root.component += source
     source.versions = source.clones['versions']
     root.component += BuildoutWithVersionPins()
@@ -63,7 +61,6 @@ def test_dist_paths_are_listed_as_develop_paths_in_overrides(buildout):
 
 def test_no_dist_sources_configured_does_not_break(root):
     source = Source()
-    source.defdir = root.defdir
     root.component += source
     root.component += Buildout()
     root.component.configure()
