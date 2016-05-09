@@ -1,6 +1,3 @@
-# Copyright (c) 2014 gocept gmbh & co. kg
-# See also LICENSE.txt
-
 # This should be only one line. If it must be multi-line, indent the second
 # line onwards to keep the PKG-INFO file format intact.
 """Batou components for managing source code in a development deployment.
@@ -25,6 +22,7 @@ setup(
 
     extras_require={
         'test': [
+            'batou >= 1.2',
             'mock',
         ],
     },

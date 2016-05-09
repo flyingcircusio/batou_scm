@@ -15,7 +15,6 @@ def source(root):
         sources=repr([
             'hg+https://example.com/baz revision=BAZ',
         ]))
-    source.defdir = root.defdir
     root.component += source
     root.component.configure()
     return source
