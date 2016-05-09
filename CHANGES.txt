@@ -6,7 +6,7 @@ Change log for batou_scm
 0.4 (unreleased)
 ================
 
-- Nothing changed yet.
+- Fixed compatibility with pre-1.1 batou.
 
 
 0.3.1 (2016-05-09)

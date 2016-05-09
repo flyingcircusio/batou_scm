@@ -1,7 +1,13 @@
-from batou import UpdateNeeded, SilentConfigurationError
+from batou import UpdateNeeded
 from batou.lib.buildout import Buildout
 from batou.lib.file import Directory, File
 import pkg_resources
+
+try:
+    from batou import SilentConfigurationError
+except ImportError:
+    # BBB batou < 1.1
+    SilentConfigurationError = KeyError
 
 
 class Buildout(Buildout):
@@ -16,8 +22,7 @@ class Buildout(Buildout):
     def configure(self):
         try:
             self.source = self.require_one('source', self.host)
-        except (KeyError, SilentConfigurationError):
-            # BBB KeyError for batou < 1.1
+        except SilentConfigurationError:
             have_dists = False
             self.source = None
         else:
