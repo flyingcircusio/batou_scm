@@ -99,6 +99,6 @@ class BuildoutWithVersionPins(Buildout):
         # XXX Only checking has_changes won't detect advanced SCM operations
         # like updating to an older revision, but as an 80-20 solution it's
         # quite good enough.
-        if (self.versionpins.has_changes
-                or self.versionpins.has_outgoing_changesets):
+        if (self.versionpins.has_changes or
+                self.versionpins.has_outgoing_changesets):
             raise UpdateNeeded()
