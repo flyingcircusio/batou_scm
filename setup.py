@@ -17,12 +17,11 @@ setup(
     version='0.4.dev0',
 
     install_requires=[
-        'batou >= 1.0b26.dev0',
+        'batou >= 1.3',
     ],
 
     extras_require={
         'test': [
-            'batou >= 1.2',
             'mock',
         ],
     },
