@@ -104,8 +104,8 @@ def test_shared_egg_dir_is_created_for_service_user(buildout):
 
 def test_verify_checks_source(buildout):
     with mock.patch('batou.lib.buildout.Buildout.verify'):
-        with mock.patch('batou.lib.mercurial.Clone.has_changes',
-                        mock.PropertyMock()) as has_changes:
+        with mock.patch('batou.lib.mercurial.Clone.has_changes') \
+                as has_changes:
             has_changes.return_value = False
             buildout.source.assert_no_subcomponent_changes = mock.Mock()
             buildout.verify()
@@ -130,8 +130,8 @@ def test_buildout__BuildoutWithVersionPins__verify__1(
         buildout_with_version_pins):
     """`verify()` requests update on changed versions."""
     buildout = buildout_with_version_pins
-    with mock.patch('batou.lib.mercurial.Clone.has_changes',
-                    mock.PropertyMock()) as has_changes:
+    with mock.patch('batou.lib.mercurial.Clone.has_changes') \
+            as has_changes:
         has_changes.return_value = True
         with pytest.raises(UpdateNeeded):
             buildout.verify()
@@ -141,10 +141,10 @@ def test_buildout__BuildoutWithVersionPins__verify__2(
         buildout_with_version_pins):
     """`verify()` requests update on outgoing changes in versions."""
     buildout = buildout_with_version_pins
-    with mock.patch('batou.lib.mercurial.Clone.has_outgoing_changesets',
-                    mock.PropertyMock()) as has_outgoing_changesets, \
-            mock.patch('batou.lib.mercurial.Clone.has_changes',
-                       mock.PropertyMock()) as has_changes:
+    with mock.patch('batou.lib.mercurial.Clone.has_outgoing_changesets') \
+            as has_outgoing_changesets, \
+            mock.patch('batou.lib.mercurial.Clone.has_changes') \
+            as has_changes:
         has_changes.return_value = False
         has_outgoing_changesets.return_value = True
         with pytest.raises(UpdateNeeded):
