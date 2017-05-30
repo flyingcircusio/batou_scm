@@ -6,6 +6,7 @@ Change log for batou_scm
 ================
 
 - Fix `has_changes` detection of clone in buildout component.
+  This requires `batou >= 1.3`.
 
 
 0.3.2 (2016-05-09)
