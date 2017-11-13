@@ -5,7 +5,7 @@ Change log for batou_scm
 0.5 (unreleased)
 ================
 
-- Nothing changed yet.
+- Remove absolute path in setup.py.
 
 
 0.4 (2017-05-30)
