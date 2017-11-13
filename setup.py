@@ -9,7 +9,7 @@ import glob
 
 setup(
     name='batou_scm',
-    version='0.5.dev0',
+    version='0.5',
 
     install_requires=[
         'batou >= 1.3',
