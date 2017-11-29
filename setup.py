@@ -4,8 +4,6 @@
 """
 
 from setuptools import setup, find_packages
-import glob
-
 
 setup(
     name='batou_scm',
@@ -42,14 +40,13 @@ Programming Language :: Python :: 2 :: Only
 """[:-1].split('\n'),
     description=__doc__.strip(),
     long_description='\n\n'.join(open(name).read() for name in (
-        'README.txt',
-        'HACKING.txt',
-        'CHANGES.txt',
+        'README.rst',
+        'HACKING.rst',
+        'CHANGES.rst',
     )),
 
     packages=find_packages('src'),
     package_dir={'': 'src'},
     include_package_data=True,
-    data_files=[('', glob.glob('*.txt'))],
     zip_safe=False,
 )
