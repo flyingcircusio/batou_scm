@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='batou_scm',
-    version='0.6.dev0',
+    version='0.6',
 
     install_requires=[
         'batou >= 1.3',
