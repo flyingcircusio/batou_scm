@@ -5,7 +5,7 @@ Change log for batou_scm
 0.6 (unreleased)
 ================
 
-- Nothing changed yet.
+- Update to `pytest >= 3.3`.
 
 
 0.5 (2017-11-13)
