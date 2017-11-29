@@ -1,5 +1,4 @@
 from batou import UpdateNeeded
-from batou.conftest import root
 from batou.lib.file import Directory, File
 from batou_scm.buildout import Buildout, BuildoutWithVersionPins
 from batou_scm.source import Source
@@ -7,6 +6,8 @@ import ConfigParser
 import StringIO
 import mock
 import pytest
+
+pytest_plugins = 'batou.conftest'
 
 
 @pytest.fixture
@@ -150,6 +151,3 @@ def test_buildout__BuildoutWithVersionPins__verify__2(
         has_outgoing_changesets.return_value = True
         with pytest.raises(UpdateNeeded):
             buildout.verify()
-
-
-root  # XXX satisfy pyflakes
