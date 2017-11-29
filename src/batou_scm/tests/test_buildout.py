@@ -1,6 +1,6 @@
 from batou import UpdateNeeded
 from batou.conftest import root
-from batou.lib.file import Directory
+from batou.lib.file import Directory, File
 from batou_scm.buildout import Buildout, BuildoutWithVersionPins
 from batou_scm.source import Source
 import ConfigParser
@@ -17,7 +17,7 @@ def buildout(root):
             'hg+https://example.com/bar',
         ]))
     root.component += source
-    root.component += Buildout()
+    root.component += Buildout(config=File('buildout.cfg', content=''))
     root.component.configure()
     return root.component._
 
@@ -32,7 +32,8 @@ def buildout_with_version_pins(root):
         sources=repr(['hg+https://example.com/ver target=versions']))
     root.component += source
     source.versions = source.clones['versions']
-    root.component += BuildoutWithVersionPins()
+    root.component += BuildoutWithVersionPins(
+        config=File('buildout.cfg', content=''))
     root.component.configure()
     return root.component._
 
@@ -44,7 +45,7 @@ def read_config(content):
 
 
 def test_buildout_doesnt_need_source_to_be_configured(root):
-    root.component += Buildout()
+    root.component += Buildout(config=File('buildout.cfg', content=''))
     root.component.configure()
     assert '.batou-shared-eggs' in root.component._.overrides.content
     with pytest.raises(UpdateNeeded):
@@ -62,7 +63,7 @@ def test_dist_paths_are_listed_as_develop_paths_in_overrides(buildout):
 def test_no_dist_sources_configured_does_not_break(root):
     source = Source()
     root.component += source
-    root.component += Buildout()
+    root.component += Buildout(config=File('buildout.cfg', content=''))
     root.component.configure()
     buildout = root.component._
     assert 'develop +=' not in buildout.overrides.content
