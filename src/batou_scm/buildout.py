@@ -1,13 +1,8 @@
+from batou import SilentConfigurationError
 from batou import UpdateNeeded
 from batou.lib.buildout import Buildout
 from batou.lib.file import Directory, File
 import pkg_resources
-
-try:
-    from batou import SilentConfigurationError
-except ImportError:
-    # BBB batou < 1.1
-    SilentConfigurationError = KeyError
 
 
 class Buildout(Buildout):
