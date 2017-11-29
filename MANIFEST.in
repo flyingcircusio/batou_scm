@@ -4,7 +4,6 @@ include *.yml
 include .coveragerc
 include buildout.cfg
 include pytest.ini
-include versions.cfg
 include src/batou_scm/resources/hgrc
 
 exclude MANIFEST.in
