@@ -15,8 +15,6 @@ class Source(Component):
     sources = '[]'
 
     hg_hostfingerprints = {
-        'bitbucket.org':
-        'SHA256:32:12:90:9A:70:64:82:1C:5B:52:CC:C3:0A:D0:79:DB:E1:A8:62:1B:9A:9A:4C:F4:72:40:1C:A7:3A:D3:0A:8C',
     }
     additional_hgrc_content = ''
 
