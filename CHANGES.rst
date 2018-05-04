@@ -2,8 +2,8 @@
 Change log for batou_scm
 ========================
 
-0.7 (unreleased)
-================
+0.6.2 (2018-05-04)
+==================
 
 - Update bitbucket.org fingerprint again.
 
