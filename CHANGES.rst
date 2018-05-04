@@ -2,6 +2,12 @@
 Change log for batou_scm
 ========================
 
+0.7 (unreleased)
+================
+
+- Nothing changed yet.
+
+
 0.6.3 (2018-05-04)
 ==================
 
