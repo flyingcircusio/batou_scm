@@ -16,7 +16,7 @@ class Source(Component):
 
     hg_hostfingerprints = {
         'bitbucket.org':
-        '70:A7:44:EA:A9:EA:E8:69:16:EA:12:00:35:A9:A6:0E:AE:38:8E:F8',
+        'SHA256:32:12:90:9A:70:64:82:1C:5B:52:CC:C3:0A:D0:79:DB:E1:A8:62:1B:9A:9A:4C:F4:72:40:1C:A7:3A:D3:0A:8C',
     }
     additional_hgrc_content = ''
 
