@@ -6,6 +6,7 @@ syntax: glob
 .coverage
 .installed.cfg
 .mr.developer.cfg
+.pytest_cache
 bin
 build
 coverage-report
