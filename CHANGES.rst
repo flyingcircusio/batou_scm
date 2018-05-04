@@ -5,6 +5,8 @@ Change log for batou_scm
 0.7 (unreleased)
 ================
 
+- Update bitbucket.org fingerprint again.
+
 - Remove `code.gocept.com` from fingerprints.
 
 
