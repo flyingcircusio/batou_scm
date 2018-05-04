@@ -64,13 +64,14 @@ def test_revisions_are_read_from_parameters(source):
 
 
 def test_hg_hostfingerprints_are_sorted(source):
+    source.hg_hostfingerprints['code.gocept.com'] = 'fpr3'
     source.hg_hostfingerprints['bitbucket.org'] = 'fpr1'
     source.hg_hostfingerprints['example.com'] = 'fpr2'
     source.configure()
     assert source.hgrc.content.startswith("""\
 [hostfingerprints]
 bitbucket.org = fpr1
-code.gocept.com = 61:3f:8d:c9:b5:1f:65:79:68:d2:7d:1b:45:a2:c9:cb:b0:b4:32:de
+code.gocept.com = fpr3
 example.com = fpr2
 """)
 
