@@ -5,7 +5,7 @@ Change log for batou_scm
 0.7 (unreleased)
 ================
 
-- Nothing changed yet.
+- Remove `code.gocept.com` from fingerprints.
 
 
 0.6.1 (2018-05-04)
