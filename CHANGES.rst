@@ -5,7 +5,7 @@ Change log for batou_scm
 0.7 (unreleased)
 ================
 
-- Nothing changed yet.
+- Require ``pytest < 5`` for the test to keep Python 2 support.
 
 
 0.6.3 (2018-05-04)
