@@ -4,6 +4,6 @@ pipelines:
   default:
     - step:
         script:
-          - pip install -U setuptools==35.0.2 zc.buildout
+          - pip install -U setuptools==35.0.2 zc.buildout setuptools-scm
           - buildout -n buildout:eggs-directory=../eggs
           - bin/test --cache-clear -p no:sugar --cov-report term-missing --cov src
