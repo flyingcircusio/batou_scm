@@ -2,6 +2,9 @@ language: python
 dist: xenial
 python:
     - 2.7
+before_install:
+  - pip freeze
+  - pip uninstall -y pytest pluggy attrs
 install:
     - pip install -U setuptools==35.0.2 zc.buildout setuptools-scm coveralls
     - buildout -n
