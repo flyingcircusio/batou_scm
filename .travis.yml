@@ -7,13 +7,11 @@ before_install:
   - pip uninstall --yes --requirement uninstall.txt
   - rm uninstall.txt
 install:
-    - pip install -U setuptools zc.buildout setuptools-scm coveralls
+    - pip install -U setuptools zc.buildout setuptools-scm
     - buildout -n
 script:
     - bin/test --fixtures
     - bin/test --cache-clear -p no:sugar --cov-report term-missing --cov src
-after_success:
-    - coveralls
 cache:
   pip: true
   directories:
