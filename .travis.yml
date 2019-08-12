@@ -3,8 +3,9 @@ dist: xenial
 python:
     - 2.7
 before_install:
-  - pip freeze
-  - pip uninstall -y pytest pluggy attrs py
+  - pip freeze > uninstall.txt
+  - pip uninstall --yes --requirement uninstall.txt
+  - rm uninstall.txt
 install:
     - pip install -U setuptools zc.buildout setuptools-scm coveralls
     - buildout -n
