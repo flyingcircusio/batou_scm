@@ -28,7 +28,7 @@ setup(
     author='gocept <mail@gocept.com>',
     author_email='mail@gocept.com',
     license='ZPL 2.1',
-    url='https://bitbucket.org/gocept/batou_scm/',
+    url='https://github.com/gocept/batou_scm',
 
     keywords='batou source code development checkout clone buildout',
     classifiers="""\

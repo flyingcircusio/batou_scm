@@ -7,6 +7,8 @@ Change log for batou_scm
 
 - Require ``pytest < 5`` for the test to keep Python 2 support.
 
+- Migrate repository to github.
+
 
 0.6.3 (2018-05-04)
 ==================
