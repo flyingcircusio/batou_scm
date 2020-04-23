@@ -24,8 +24,8 @@ class Buildout(Buildout):
             have_dists = len(self.source.distributions)
 
         if have_dists:
-            self.dist_names, distributions = zip(
-                *sorted(self.source.distributions.items()))
+            self.dist_names, distributions = list(zip(
+                *sorted(self.source.distributions.items())))
             self.dist_paths = [clone.target for clone in distributions]
         else:
             self.dist_names = []
@@ -65,7 +65,7 @@ class Buildout(Buildout):
                 self.__update_needed = True
             else:
                 self.__update_needed = False
-            for clone in self.source.clones.values():
+            for clone in list(self.source.clones.values()):
                 if clone.has_changes():
                     self.__update_needed = True
         if self.__update_needed:

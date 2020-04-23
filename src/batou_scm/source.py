@@ -6,7 +6,7 @@ import batou.lib.mercurial
 import collections
 import os.path
 import pkg_resources
-import urlparse
+import urllib.parse
 
 
 class Source(Component):
@@ -22,7 +22,7 @@ class Source(Component):
 
     def _eval_attr(self, *names):
         for name in names:
-            if isinstance(getattr(self, name), basestring):
+            if isinstance(getattr(self, name), str):
                 setattr(self, name, ast.literal_eval(getattr(self, name)))
 
     def configure(self):
@@ -61,13 +61,13 @@ class Source(Component):
     }
 
     def add_clone(self, url):
-        parts = urlparse.urlsplit(url)
+        parts = urllib.parse.urlsplit(url)
         vcs, _, scheme = parts.scheme.partition('+')
         if not vcs:
             raise ValueError(
                 'Malformed VCS URL %r, need <vcs>+<protocol>://<url>, '
                 'e.g. hg+ssh://hg@bitbucket.org/gocept/batou' % url)
-        url = urlparse.urlunsplit((scheme,) + parts[1:])
+        url = urllib.parse.urlunsplit((scheme,) + parts[1:])
 
         url, _, parameter_list = url.partition(' ')
         parameters = {}

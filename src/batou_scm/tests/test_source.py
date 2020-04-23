@@ -30,7 +30,7 @@ def test_all_clones_are_configured_as_subcomponents(source):
 
 
 def test_all_targets_are_derived_from_clone_urls(source):
-    assert {clone.url: clone.target for clone in source.clones.values()} == {
+    assert {clone.url: clone.target for clone in list(source.clones.values())} == {
         'https://example.com/foo': source.map('foo'),
         'https://example.com/bar': source.map('bar'),
         'https://example.com/baz': source.map('baz')}
@@ -38,7 +38,7 @@ def test_all_targets_are_derived_from_clone_urls(source):
 
 def test_distributions_are_collected_separately(source):
     assert {
-        clone.url: clone.target for clone in source.distributions.values()
+        clone.url: clone.target for clone in list(source.distributions.values())
     } == {
         'https://example.com/foo': source.map('foo'),
         'https://example.com/bar': source.map('bar'),

@@ -3,8 +3,8 @@ from batou import UpdateNeeded
 from batou.lib.file import Directory, File
 from batou_scm.buildout import Buildout, BuildoutWithVersionPins
 from batou_scm.source import Source
-import ConfigParser
-import StringIO
+import configparser
+import io
 import mock
 import pytest
 
@@ -39,8 +39,8 @@ def buildout_with_version_pins(root):
 
 
 def read_config(content):
-    config = ConfigParser.ConfigParser()
-    config.readfp(StringIO.StringIO(content))
+    config = configparser.ConfigParser()
+    config.readfp(io.StringIO(content))
     return config
 
 

@@ -10,7 +10,7 @@ setup(
     version='0.7.dev0',
 
     install_requires=[
-        'batou >= 1.3',
+        'batou >= 2.0dev0',
     ],
 
     extras_require={
