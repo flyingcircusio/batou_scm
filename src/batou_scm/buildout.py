@@ -65,7 +65,7 @@ class Buildout(Buildout):
                 self.__update_needed = True
             else:
                 self.__update_needed = False
-            for clone in list(self.source.clones.values()):
+            for clone in self.source.clones.values():
                 if clone.has_changes():
                     self.__update_needed = True
         if self.__update_needed:
