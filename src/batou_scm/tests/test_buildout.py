@@ -1,4 +1,4 @@
-efrom batou import UpdateNeeded
+from batou import UpdateNeeded
 from batou.lib.file import Directory, File
 from batou_scm.buildout import Buildout, BuildoutWithVersionPins
 from batou_scm.source import Source
