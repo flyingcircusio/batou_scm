@@ -1,4 +1,3 @@
-from batou.fixtures import root
 from batou.lib.mercurial import Clone
 from batou_scm.source import Source
 import os.path
@@ -9,8 +8,8 @@ import pytest
 def source(root):
     source = Source(
         dist_sources=repr([
-        'hg+https://example.com/foo',
-        'hg+https://example.com/bar branch=BAR']),
+            'hg+https://example.com/foo',
+            'hg+https://example.com/bar branch=BAR']),
         sources=repr([
             'hg+https://example.com/baz revision=BAZ']))
     root.component += source
@@ -82,6 +81,3 @@ def test_additional_hgrc_content_is_taken_from_file_if_present(source):
     open(os.path.join(source.defdir, 'hgrc'), 'w').write('foo')
     source.configure()
     assert b'foo' in source.hgrc.content
-
-
-root  # XXX satisfy pyflakes
