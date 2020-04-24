@@ -60,6 +60,7 @@ def test_no_dist_sources_configured_does_not_break(root):
     root.component += Buildout(config=File('buildout.cfg', content=''))
     root.component.configure()
     buildout = root.component._
+    assert 'develop +=' not in buildout.overrides.content
     assert buildout.source is not None
 
 

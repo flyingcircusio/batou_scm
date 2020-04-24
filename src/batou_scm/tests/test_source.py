@@ -7,13 +7,12 @@ import pytest
 
 @pytest.fixture
 def source(root):
-    source = Source(dist_sources=repr([
+    source = Source(
+        dist_sources=repr([
         'hg+https://example.com/foo',
-        'hg+https://example.com/bar branch=BAR',
-    ]),
-                    sources=repr([
-                        'hg+https://example.com/baz revision=BAZ',
-                    ]))
+        'hg+https://example.com/bar branch=BAR']),
+        sources=repr([
+            'hg+https://example.com/baz revision=BAZ']))
     root.component += source
     root.component.configure()
     return source
@@ -23,7 +22,8 @@ def test_all_clones_are_configured_as_subcomponents(source):
     clones = [s for s in source.sub_components if isinstance(s, Clone)]
     assert set(clones) == set(source.clones.values())
     assert set(clone.url for clone in clones) == set([
-        'https://example.com/foo', 'https://example.com/bar',
+        'https://example.com/foo',
+        'https://example.com/bar',
         'https://example.com/baz'
     ])
 
