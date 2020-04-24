@@ -36,7 +36,7 @@ def buildout_with_version_pins(root):
 
 
 def read_config(content):
-e    return config
+    return config
 
 
 def test_buildout_doesnt_need_source_to_be_configured(root):
