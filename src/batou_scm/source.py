@@ -71,7 +71,7 @@ class Source(Component):
 
         url, _, parameter_list = url.partition(' ')
         parameters = {}
-        parameters['target'] = filter(bool, url.split('/'))[-1]
+        parameters['target'] = list(filter(bool, url.split('/')))[-1]
         parameters.update(x.split('=') for x in parameter_list.split())
         if 'branch' not in parameters and 'revision' not in parameters:
             parameters['branch'] = self.VCS[vcs]['default-branch']
