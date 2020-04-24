@@ -1,44 +1,14 @@
-language: generic
-matrix:
-  include:
-    - name: "Python 3.5"
-      env:
-        - PYTHON=3.5
-        - PYTHONCMD=python3.5
-    - name: "Python 3.6"
-      env:
-        - PYTHON=3.6
-        - PYTHONCMD=python3.6
-    - name: "Python 3.7"
-      env:
-        - PYTHON=3.7
-        - PYTHONCMD=python3.7
-    - name: "Python 3.8"
-      env:
-        - PYTHON=3.8
-        - PYTHONCMD=python3.8
-    # requires zc.buildout to become compatible
-    #   https://github.com/buildout/buildout/issues/497
-    # (yes we could ask buildout to run against a different python version
-    #  but that would make the travis setup explode even more ...)
-    # - name: "Python 3.9-dev"
-    #   env:
-    #     - PYTHON=3.9-dev
-    #     - PYTHONCMD=python3.9
-    # - name: "Python nightly"
-    #   env:
-    #     - PYTHON=nightly
-    #     - PYTHONCMD=python3.9
+language: python
+dist: xenial
+python:
+    - 3.6
+install:
+    - pip install -U setuptools==35.0.2 zc.buildout setuptools-scm coveralls
+    - buildout -n
 script:
-  - sudo apt-get install python3-venv libyaml-dev
-  - curl -sSf -o python-$PYTHON.tar.bz2 https://storage.googleapis.com/travis-ci-language-archives/python/binaries/ubuntu/16.04/x86_64/python-$PYTHON.tar.bz2
-  - sudo tar xjf python-$PYTHON.tar.bz2 --directory /
-  - /opt/python/$PYTHON/bin/$PYTHONCMD -m venv .
-  - pip install -U setuptools==35.0.2 zc.buildout setuptools-scm coveralls
-  - bin/buildout -n
-  - bin/pytest --cache-clear -p no:sugar --cov-report term-missing --cov src
+    - bin/pytest --cache-clear -p no:sugar --cov-report term-missing --cov src
 after_success:
-  - coveralls
+    - coveralls
 cache:
   pip: true
 notifications:
