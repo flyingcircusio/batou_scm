@@ -7,8 +7,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='batou_scm',
-    version='0.7.dev0',
+    version='1.0b1.dev0',
 
+    python_requires='>=3.6, <4',
     install_requires=[
         'batou >= 2.0dev0',
     ],
@@ -35,6 +36,9 @@ setup(
 License :: OSI Approved :: Zope Public License
 Programming Language :: Python
 Programming Language :: Python :: 3
+Programming Language :: Python :: 3.6
+Programming Language :: Python :: 3.7
+Programming Language :: Python :: 3.8
 """[:-1].split('\n'),
     description=__doc__.strip(),
     long_description='\n\n'.join(open(name).read() for name in (
