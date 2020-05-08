@@ -2,10 +2,14 @@
 Change log for batou_scm
 ========================
 
-0.7 (unreleased)
+1.0 (unreleased)
 ================
 
-- Support Python 3, drop support for Python 2.
+- Add support for Python 3.6+
+
+- Require ``batou >= 2``.
+
+- Drop support for Python 2.7.
 
 - Migrate repository to github.
 
