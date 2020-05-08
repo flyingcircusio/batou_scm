@@ -2,8 +2,8 @@
 Change log for batou_scm
 ========================
 
-1.0 (unreleased)
-================
+1.0b1 (2020-05-08)
+==================
 
 - Add support for Python 3.6+
 
