@@ -1,10 +1,8 @@
-from batou.conftest import root
 from batou import UpdateNeeded
 from batou.lib.file import Directory, File
 from batou_scm.buildout import Buildout, BuildoutWithVersionPins
 from batou_scm.source import Source
-import ConfigParser
-import StringIO
+import configparser
 import mock
 import pytest
 
@@ -39,15 +37,15 @@ def buildout_with_version_pins(root):
 
 
 def read_config(content):
-    config = ConfigParser.ConfigParser()
-    config.readfp(StringIO.StringIO(content))
+    config = configparser.ConfigParser()
+    config.read_string(content.decode('ascii'))
     return config
 
 
 def test_buildout_doesnt_need_source_to_be_configured(root):
     root.component += Buildout(config=File('buildout.cfg', content=''))
     root.component.configure()
-    assert '.batou-shared-eggs' in root.component._.overrides.content
+    assert b'.batou-shared-eggs' in root.component._.overrides.content
     with pytest.raises(UpdateNeeded):
         root.component._.verify()
 
@@ -66,7 +64,7 @@ def test_no_dist_sources_configured_does_not_break(root):
     root.component += Buildout(config=File('buildout.cfg', content=''))
     root.component.configure()
     buildout = root.component._
-    assert 'develop +=' not in buildout.overrides.content
+    assert b'develop +=' not in buildout.overrides.content
     assert buildout.source is not None
 
 
@@ -150,6 +148,3 @@ def test_buildout__BuildoutWithVersionPins__verify__2(
         has_outgoing_changesets.return_value = True
         with pytest.raises(UpdateNeeded):
             buildout.verify()
-
-
-root  # XXX satisfy pyflakes

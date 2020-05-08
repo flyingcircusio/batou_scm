@@ -5,7 +5,7 @@ Change log for batou_scm
 0.7 (unreleased)
 ================
 
-- Require ``pytest < 5`` for the test to keep Python 2 support.
+- Support Python 3, drop support for Python 2.
 
 - Migrate repository to github.
 

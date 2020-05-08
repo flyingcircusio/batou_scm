@@ -1,12 +1,12 @@
 language: python
 dist: xenial
 python:
-    - 2.7
+    - 3.6
 install:
     - pip install -U setuptools==35.0.2 zc.buildout setuptools-scm coveralls
     - buildout -n
 script:
-    - bin/test --cache-clear -p no:sugar --cov-report term-missing --cov src
+    - bin/pytest --cache-clear -p no:sugar --cov-report term-missing --cov src
 after_success:
     - coveralls
 cache:

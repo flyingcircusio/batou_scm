@@ -10,7 +10,7 @@ setup(
     version='0.7.dev0',
 
     install_requires=[
-        'batou >= 1.3',
+        'batou >= 2.0dev0',
     ],
 
     extras_require={
@@ -34,9 +34,7 @@ setup(
     classifiers="""\
 License :: OSI Approved :: Zope Public License
 Programming Language :: Python
-Programming Language :: Python :: 2
-Programming Language :: Python :: 2.7
-Programming Language :: Python :: 2 :: Only
+Programming Language :: Python :: 3
 """[:-1].split('\n'),
     description=__doc__.strip(),
     long_description='\n\n'.join(open(name).read() for name in (
