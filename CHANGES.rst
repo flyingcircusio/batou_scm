@@ -5,13 +5,13 @@ Change log for batou_scm
 1.0b2 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Update default versions used in Buildout component to recent versions.
 
 
 1.0b1 (2020-05-08)
 ==================
 
-- Add support for Python 3.6+
+- Add support for Python 3.6 up to 3.8.
 
 - Require ``batou >= 2``.
 

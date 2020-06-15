@@ -7,9 +7,9 @@ import pkg_resources
 
 class Buildout(Buildout):
 
-    python = '2.7'
-    version = '2.5.0'
-    setuptools = '20.7'
+    python = '3.7'
+    version = '2.13.3'
+    setuptools = '47.1.1'
 
     eggs_directory = '~/.batou-shared-eggs'
     versionpins = None
