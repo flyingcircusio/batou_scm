@@ -2,7 +2,7 @@
 Change log for batou_scm
 ========================
 
-1.0b2 (unreleased)
+1.0b2 (2020-06-15)
 ==================
 
 - Update default versions used in Buildout component to recent versions.
