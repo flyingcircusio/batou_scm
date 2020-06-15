@@ -2,6 +2,12 @@
 Change log for batou_scm
 ========================
 
+1.0b3 (unreleased)
+==================
+
+- Nothing changed yet.
+
+
 1.0b2 (2020-06-15)
 ==================
 
