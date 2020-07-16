@@ -2,7 +2,7 @@
 Change log for batou_scm
 ========================
 
-1.0 (unreleased)
+1.0 (2020-07-16)
 ================
 
 - Update default setup tools version to latest release.
