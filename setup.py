@@ -7,11 +7,11 @@ from setuptools import setup, find_packages
 
 setup(
     name='batou_scm',
-    version='1.0b3.dev0',
+    version='1.0.dev0',
 
     python_requires='>=3.6, <4',
     install_requires=[
-        'batou >= 2.0dev0',
+        'batou >= 2',
     ],
 
     extras_require={
@@ -33,7 +33,7 @@ setup(
 
     keywords='batou source code development checkout clone buildout',
     classifiers="""\
-Development Status :: 4 - Beta
+Development Status :: 5 - Production/Stable
 Intended Audience :: Developers
 License :: OSI Approved :: Zope Public License
 Operating System :: OS Independent

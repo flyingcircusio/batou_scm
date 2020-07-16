@@ -9,7 +9,7 @@ class Buildout(Buildout):
 
     python = '3.7'
     version = '2.13.3'
-    setuptools = '47.1.1'
+    setuptools = '49.2.0'
 
     eggs_directory = '~/.batou-shared-eggs'
     versionpins = None
