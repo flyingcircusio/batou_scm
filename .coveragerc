@@ -4,6 +4,7 @@ source = batou_scm
 
 [report]
 precision = 2
+fail_under = 97
 
 [html]
 directory = coverage-report

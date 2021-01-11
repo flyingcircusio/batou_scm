@@ -5,7 +5,9 @@ Change log for batou_scm
 1.1 (unreleased)
 ================
 
-- Nothing changed yet.
+- Use Github actions as CI.
+
+- Claim support for Python 3.9
 
 
 1.0 (2020-07-16)
