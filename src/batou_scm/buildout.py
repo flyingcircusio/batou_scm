@@ -1,7 +1,8 @@
 from batou import SilentConfigurationError
 from batou import UpdateNeeded
 from batou.lib.buildout import Buildout
-from batou.lib.file import Directory, File
+from batou.lib.file import Directory
+from batou.lib.file import File
 import pkg_resources
 
 
