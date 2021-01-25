@@ -33,7 +33,7 @@ def test_all_targets_are_derived_from_clone_urls(source):
                 'https://example.com/foo': source.map('foo'),
                 'https://example.com/bar': source.map('bar'),
                 'https://example.com/baz': source.map('baz')
-            }
+    }
 
 
 def test_distributions_are_collected_separately(source):

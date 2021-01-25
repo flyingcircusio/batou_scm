@@ -1,5 +1,6 @@
 from batou.component import Component
-from batou.lib.file import File, Content
+from batou.lib.file import Content
+from batou.lib.file import File
 import ast
 import batou.lib.git
 import batou.lib.mercurial

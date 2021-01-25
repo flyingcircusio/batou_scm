@@ -3,7 +3,9 @@
 """Batou components for managing source code in a development deployment.
 """
 
-from setuptools import setup, find_packages
+from setuptools import find_packages
+from setuptools import setup
+
 
 setup(
     name='batou_scm',
