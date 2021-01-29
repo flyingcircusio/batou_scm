@@ -9,6 +9,9 @@ Change log for batou_scm
 
 - Claim support for Python 3.9
 
+- Fix bug in ``.buildout.Buildout`` where it was not always updated when a
+  source has changed.
+
 
 1.0 (2020-07-16)
 ================
