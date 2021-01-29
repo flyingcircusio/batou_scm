@@ -2,7 +2,7 @@
 Change log for batou_scm
 ========================
 
-1.1 (unreleased)
+1.1 (2021-01-29)
 ================
 
 - Use Github actions as CI.

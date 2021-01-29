@@ -9,7 +9,7 @@ from setuptools import setup
 
 setup(
     name='batou_scm',
-    version='1.1.dev0',
+    version='1.1',
 
     python_requires='>=3.6, <4',
     install_requires=[
