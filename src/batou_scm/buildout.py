@@ -61,7 +61,7 @@ class Buildout(Buildout):
         # want to short-cut repeated calls.
         if self.source and self.__update_needed is None:
             try:
-                self.source.assert_no_subcomponent_changes()
+                self.source.assert_no_changes()
             except UpdateNeeded:
                 self.__update_needed = True
             else:

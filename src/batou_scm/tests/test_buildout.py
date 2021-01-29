@@ -108,9 +108,9 @@ def test_verify_checks_source(buildout):
         with mock.patch('batou.lib.mercurial.Clone.has_changes') \
                 as has_changes:
             has_changes.return_value = False
-            buildout.source.assert_no_subcomponent_changes = mock.Mock()
+            buildout.source.assert_no_changes = mock.Mock()
             buildout.verify()
-            assert buildout.source.assert_no_subcomponent_changes.called
+            assert buildout.source.assert_no_changes.called
             assert has_changes.called
 
 
