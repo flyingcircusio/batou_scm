@@ -5,7 +5,11 @@ Change log for batou_scm
 1.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- Change git default branch in ``.source.Source`` from ``master`` to ``main``.
+
+- Add support for Python 3.10.
+
+- Drop support for Python 3.6.
 
 
 1.1 (2021-01-29)
@@ -13,7 +17,7 @@ Change log for batou_scm
 
 - Use Github actions as CI.
 
-- Claim support for Python 3.9
+- Claim support for Python 3.9.
 
 - Fix bug in ``.buildout.Buildout`` where it was not always updated when a
   source has changed.

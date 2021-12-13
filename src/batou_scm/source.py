@@ -57,7 +57,7 @@ class Source(Component):
         },
         'git': {
             'component': batou.lib.git.Clone,
-            'default-branch': 'master',
+            'default-branch': 'main',
         },
     }
 

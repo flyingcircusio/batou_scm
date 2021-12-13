@@ -15,4 +15,4 @@ Developing batou_scm
     https://github.com/gocept/batou_scm
 
 :Current change log:
-    https://raw.githubusercontent.com/gocept/batou_scm/master/CHANGES.rst
+    https://raw.githubusercontent.com/gocept/batou_scm/main/CHANGES.rst
