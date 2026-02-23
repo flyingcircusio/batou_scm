@@ -11,6 +11,8 @@ Change log for batou_scm
 
 - Drop support for Python 3.6. to 3.8.
 
+- Replace use of `pkg_resources`.
+
 
 1.1 (2021-01-29)
 ================

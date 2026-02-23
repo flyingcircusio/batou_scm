@@ -1,4 +1,5 @@
-import pkg_resources
+import importlib.resources
+
 from batou import SilentConfigurationError, UpdateNeeded
 from batou.lib.buildout import Buildout
 from batou.lib.file import Directory, File
@@ -39,8 +40,10 @@ class Buildout(Buildout):
 
         self.overrides = File(
             "buildout_overrides.cfg",
-            source=pkg_resources.resource_filename(
-                "batou_scm", "resources/buildout_overrides.cfg"
+            source=str(
+                importlib.resources.files("batou_scm").joinpath(
+                    "resources/buildout_overrides.cfg"
+                )
             ),
         )
         self.additional_config += (self.overrides,)

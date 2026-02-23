@@ -1,11 +1,11 @@
 import ast
 import collections
+import importlib.resources
 import os.path
 import urllib.parse
 
 import batou.lib.git
 import batou.lib.mercurial
-import pkg_resources
 from batou.component import Component
 from batou.lib.file import Content, File
 
@@ -42,8 +42,10 @@ class Source(Component):
 
         self.hgrc = File(
             "~/.hgrc",
-            source=pkg_resources.resource_filename(
-                "batou_scm", "resources/hgrc"
+            source=str(
+                importlib.resources.files("batou_scm").joinpath(
+                    "resources/hgrc"
+                )
             ),
         )
         self += self.hgrc
