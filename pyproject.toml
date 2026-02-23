@@ -1,2 +1,48 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "batou_scm"
+version = "1.2.dev0"
+readme = "README.rst"
+license = {text = "ZPL 2.1"}
+requires-python = ">=3.9"
+dependencies = [
+    "batou >= 2",
+]
+authors = [
+    {name = "Flying Circus", email = "support@flyingcircus.io"},
+]
+keywords = ["batou", "source", "code", "development", "checkout", "clone", "buildout"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Zope Public License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Build Tools",
+]
+
+[project.optional-dependencies]
+test = ["mock"]
+
+[project.urls]
+Homepage = "https://github.com/gocept/batou_scm"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["*.txt", "*.rst"]
+
 [tool.ruff]
 line-length = 80
+
+[bdist_wheel]
+universal = 0

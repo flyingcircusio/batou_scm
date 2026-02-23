@@ -7,9 +7,9 @@ Change log for batou_scm
 
 - Change git default branch in ``.source.Source`` from ``master`` to ``main``.
 
-- Add support for Python 3.10.
+- Add support for Python 3.10.+
 
-- Drop support for Python 3.6.
+- Drop support for Python 3.6. to 3.8.
 
 
 1.1 (2021-01-29)
