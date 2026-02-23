@@ -143,8 +143,18 @@ def test_buildout__BuildoutWithVersionPins__verify__1(
 ):
     """`verify()` requests update on changed versions."""
     buildout = buildout_with_version_pins
-    with mock.patch("batou.lib.mercurial.Clone.has_changes") as has_changes:
-        has_changes.return_value = True
+    buildout.__update_needed = None
+    with (
+        mock.patch("batou.lib.buildout.Buildout.verify"),
+        mock.patch.object(
+            buildout.source.clones["versions"], "has_changes", return_value=True
+        ),
+        mock.patch("batou.lib.mercurial.Clone.has_changes", return_value=False),
+        mock.patch(
+            "batou.lib.mercurial.Clone.has_outgoing_changesets",
+            return_value=False,
+        ),
+    ):
         with pytest.raises(UpdateNeeded):
             buildout.verify()
 
@@ -154,13 +164,19 @@ def test_buildout__BuildoutWithVersionPins__verify__2(
 ):
     """`verify()` requests update on outgoing changes in versions."""
     buildout = buildout_with_version_pins
+    buildout.__update_needed = None
     with (
+        mock.patch("batou.lib.buildout.Buildout.verify"),
+        mock.patch.object(
+            buildout.source.clones["versions"],
+            "has_changes",
+            return_value=False,
+        ),
         mock.patch(
-            "batou.lib.mercurial.Clone.has_outgoing_changesets"
-        ) as has_outgoing_changesets,
-        mock.patch("batou.lib.mercurial.Clone.has_changes") as has_changes,
+            "batou.lib.mercurial.Clone.has_outgoing_changesets",
+            return_value=True,
+        ),
+        mock.patch("batou.lib.mercurial.Clone.has_changes", return_value=False),
     ):
-        has_changes.return_value = False
-        has_outgoing_changesets.return_value = True
         with pytest.raises(UpdateNeeded):
             buildout.verify()

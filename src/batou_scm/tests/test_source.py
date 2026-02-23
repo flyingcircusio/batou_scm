@@ -88,3 +88,19 @@ def test_additional_hgrc_content_is_taken_from_file_if_present(source):
     open(os.path.join(source.defdir, "hgrc"), "w").write("foo")
     source.configure()
     assert b"foo" in source.hgrc.content
+
+
+def test_malformed_vcs_url_raises_key_error(root):
+    source = Source(
+        dist_sources=repr(["https://example.com/foo"]),
+    )
+    with pytest.raises(KeyError):
+        root.component += source
+
+
+def test_vcs_url_without_vcs_prefix_raises_value_error(root):
+    source = Source(
+        dist_sources=repr(["+example.com/foo"]),
+    )
+    with pytest.raises(ValueError):
+        root.component += source
