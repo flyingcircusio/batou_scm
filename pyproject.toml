@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "batou_scm"
-version = "1.2"
+version = "1.3.dev0"
 readme = "README.rst"
 license = {text = "ZPL 2.1"}
 requires-python = ">=3.9"
