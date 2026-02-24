@@ -1,23 +1,21 @@
-from batou import SilentConfigurationError
-from batou import UpdateNeeded
+import importlib.resources
+
+from batou import SilentConfigurationError, UpdateNeeded
 from batou.lib.buildout import Buildout
-from batou.lib.file import Directory
-from batou.lib.file import File
-import pkg_resources
+from batou.lib.file import Directory, File
 
 
 class Buildout(Buildout):
+    python = "3.7"
+    version = "2.13.3"
+    setuptools = "49.2.0"
 
-    python = '3.7'
-    version = '2.13.3'
-    setuptools = '49.2.0'
-
-    eggs_directory = '~/.batou-shared-eggs'
+    eggs_directory = "~/.batou-shared-eggs"
     versionpins = None
 
     def configure(self):
         try:
-            self.source = self.require_one('source', self.host)
+            self.source = self.require_one("source", self.host)
         except SilentConfigurationError:
             have_dists = False
             self.source = None
@@ -25,8 +23,9 @@ class Buildout(Buildout):
             have_dists = len(self.source.distributions)
 
         if have_dists:
-            self.dist_names, distributions = list(zip(
-                *sorted(self.source.distributions.items())))
+            self.dist_names, distributions = list(
+                zip(*sorted(self.source.distributions.items()))
+            )
             self.dist_paths = [clone.target for clone in distributions]
         else:
             self.dist_names = []
@@ -40,17 +39,21 @@ class Buildout(Buildout):
         self += self.eggs_directory
 
         self.overrides = File(
-            'buildout_overrides.cfg',
-            source=pkg_resources.resource_filename(
-                'batou_scm', 'resources/buildout_overrides.cfg'))
+            "buildout_overrides.cfg",
+            source=str(
+                importlib.resources.files("batou_scm").joinpath(
+                    "resources/buildout_overrides.cfg"
+                )
+            ),
+        )
         self.additional_config += (self.overrides,)
 
         super(Buildout, self).configure()
 
     @property
     def versions(self):
-        result = {'setuptools': self.setuptools, 'zc.buildout': self.version}
-        result.update({name: '' for name in self.dist_names})
+        result = {"setuptools": self.setuptools, "zc.buildout": self.version}
+        result.update({name: "" for name in self.dist_names})
         return sorted(result.items())
 
     __update_needed = None
@@ -81,12 +84,12 @@ class BuildoutWithVersionPins(Buildout):
     """
 
     def configure(self):
-        source = self.require_one('source', self.host)
+        source = self.require_one("source", self.host)
         self.versionpins = source.versions
 
         # XXX We should depend on all clones we are using in the buildout.cfg,
         # not just the versionpins.
-        self.additional_config += (self.versionpins, )
+        self.additional_config += (self.versionpins,)
 
         super(BuildoutWithVersionPins, self).configure()
 
@@ -95,6 +98,8 @@ class BuildoutWithVersionPins(Buildout):
         # XXX Only checking has_changes won't detect advanced SCM operations
         # like updating to an older revision, but as an 80-20 solution it's
         # quite good enough.
-        if (self.versionpins.has_changes() or
-                self.versionpins.has_outgoing_changesets()):
+        if (
+            self.versionpins.has_changes()
+            or self.versionpins.has_outgoing_changesets()
+        ):
             raise UpdateNeeded()
