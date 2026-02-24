@@ -2,7 +2,7 @@
 Change log for batou_scm
 ========================
 
-1.2 (unreleased)
+1.2 (2026-02-24)
 ================
 
 - Change git default branch in ``.source.Source`` from ``master`` to ``main``.
